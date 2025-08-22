@@ -9,7 +9,7 @@ jobs:
       id-token: write
       contents: write
     env:
-      AWS_ACCOUNT_ID: $(( secrets.AWS_ACCOUNT_ID ))
+      AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
 
     steps:
       - name: Checkout repo
@@ -18,8 +18,8 @@ jobs:
       - name: Log in to aws 
         uses: aws-actions/configure-aws-credentials@v2
         with:
-          aws-access-key-id: $(( secrets.AWS_ACCESS_KEY_ID ))
-          aws-secret-access-key: $(( secrets.AWS_SECRETS_ACCESS_KEY ))
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRETS_ACCESS_KEY }}
           aws-region: eu-west-2
 
       - name: log into amazon ecr
