@@ -8,11 +8,13 @@ jobs:
     permissions:
       id-token: write
       contents: write
+    env:
+      AWS_ACCOUNT_ID: $(( secrets.AWS_ACCOUNT_ID ))
 
     steps:
       - name: Checkout repo
         uses: actions/checkout@v2
-
+   
       - name: Log in to aws 
         uses: aws-actions/configure-aws-credentials@v2
         with:
@@ -20,7 +22,7 @@ jobs:
           aws-secret-access-key: $(( secrets.AWS_SECRETS_ACCESS_KEY ))
           aws-region: eu-west-2
 
-      - name: docker push to aws ecr 
+      - name: log into amazon ecr
         
         run: 
           aws ecr get-login-password --region eu-west-2 | docker login --username AWS --password-stdin ${AWS_ACCOUNT_ID}.dkr.ecr.eu-west-2.amazonaws.com
